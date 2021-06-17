@@ -67,7 +67,7 @@ import glob
 
 这里放置来自你最终匹配结果的截图， 如
 
-![image](../img/pose2carton.png)
+<image src="183834.png"/>
 
 
 
