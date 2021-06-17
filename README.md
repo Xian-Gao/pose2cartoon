@@ -59,17 +59,101 @@ import glob
 
 # 匹配流程
 
-这里请简单描述你熟悉/使用 匹配代码的流程，可以简述对代码的理解/各个函数作用等。
+10 组不带蒙皮模型匹配
 
 
+在提供的 groups 文件夹中找到自己对应的编号，并在其中挑选 10 个模型，在选择模型的时候
+需要注意避免非人型的模型，由于动作迁移的本体为人的动作，非人型的模型难以进行动作迁移。
+选择模型之后，将其对应的.txt 文件导入 transfer.py 程序中，将模型的关节节点与程序中提供的
+节点一一匹配，并运行 transfer.py 程序。
 
+
+运行之后可以在 obj_seq_5_3dmodel 文件夹中查看每一个动作的 obj 文件。随后运行 vis.py 程序，
+生成 447 张.png 图片，并最后生成一个.mp4 视频，在视频中即可查看模型与原模型的动作迁移情况，
+若不一致则需要进行调整。
+
+
+5 组带蒙皮模型匹配
+
+
+在网上下载 5 个模型，利用 maya 运行 fbx_parser.py，得到.fbm 文件夹以及.obj 和.txt 文件，其
+中.fbm 文件夹包含该模型的外皮.jpg 图片文件。
+
+
+将.txt 文件导入 transfer.py 程序中，并使用 transfer_one_frame 以及 transfer_one_sequence 函数。
+在对关节进行匹配之后，运行 transfer.py 程序，得到更新的 obj_seq_5_3dmodel 文件夹。
+
+
+由于网络下载的模型都是含蒙皮的，所以我们也需要将模型进行相应的蒙皮。将.fbm 文件夹中
+的.jpg 文件放入 obj_seq_5_3dmodel 文件夹，除此之外我们发现该文件夹中还有.mtl 文件的快捷方式，
+找到相应的.mtl 文件（由 transfer.py 程序生成），并进行相应的编辑，利用 map_Kd 指令指向该图片
+的名称。运行 vis.py 程序，即可得到蒙皮模型对应的动作迁移图片和视频。
+
+
+对函数的理解
+
+在 transfer.py 中，函数 transfer_given_pose 的作用之一就是提取并分析这一树形结构，将树形结
+构的节点转化为关节的标号，进而对相同的关节进行匹配并生成新的模型。
+
+
+# 新增脚本说明
+
+
+基于文本的自动匹配
+
+
+由于匹配过程的关键在于将.txt 文件中的模型关节序号与 transfer.py 文件中的人体关节序号进行
+一一对应，而这一过程的方法与流程较为固定。在匹配过程中发现尽管模型不同，但模型的关节名
+称大都相同。因此可以考虑通过对.txt 文本进行分解，从中提取出关节名称和对应的序号，实现与人
+体的自动匹配。与已有的 _lazy_get_model_to_smpl 不同的是，这里将一部分经常出现但与人体模型
+名称不同的关节进行了替换，如 L,R 替换为 left,right，elbow 替换为 shoulder 等。
+
+
+在 transfer.py 中已经有一部分代码通过分析节点之间的父子关系从而得到每个关节的标号，因
+此可以复用这部分代码，得到字典 new_joint2index。
+
+
+将字典转化为字符串。注意到有的模型在关节名称前还会有模型名称或单引号，如’mixamorig:Hips’:0。
+因此在匹配之前需要将关节名称和标号提取出来。
+
+
+使用 replace 和 split 函数将多余字符去掉，得到关节名称与编号的对应关系。接下来就是关节编
+号与人体关节的对应。将关节名称进行一一比对，比对结果存放于字符串中，在比对结束后将字符
+串转换为字典即可得到匹配结果。
+
+
+可见代码automap。
+
+
+mtl 文件修改
+
+
+在有蒙皮模型的匹配过程中，需要将.mtl 文件下的 map_Kd 后的绝对路径地址修改为相对路径
+地址，否则会导致找不到蒙皮文件，得到的匹配模型为灰色。可以通过文件读写实现这一过程。具
+体实现思路是使用遍历.mtl 文件，使用 split 提取每一行第一个单词，当检测到 map_Kd 所在行时将
+其后的路径修改，并将修改后的文件写回原文件。
+
+
+可见代码changemap
+
+
+使用方法
+
+
+在需要对 manual_model_to_smpl 进行修改时调用即可实现自动匹配。对.mtl 文件的修改在蒙皮
+开始前完成即可
 
 
 # 项目结果
 
-这里放置来自你最终匹配结果的截图， 如
 
-![image](../img/pose2carton.png)
+<image src="183834.png"/><image src="183912.png"/><image src="183939.png"/><image src="184104.png"/><image src="184213.png"/>
+<image src="184250.png"/><image src="184354.png"/><image src="184421.png"/><image src="184450.png"/><image src="184641.png"/>
+<image src="184702.png"/><image src="184828.png"/><image src="185550.png"/><image src="185613.png"/><image src="185659.png"/>
+<image src="185732.png"/><image src="185754.png"/><image src="185820.png"/><image src="185840.png"/><image src="185900.png"/>
+<image src="185921.png"/><image src="190148.png"/><image src="191110.png"/><image src="191139.png"/><image src="191204.png"/>
+<image src="191226.png"/><image src="191250.png"/><image src="snapshot00.png"/><image src="snapshot0101.png"/><image src="snapshot0200.png"/>
+<image src="snapshot0300.png"/><image src="snapshot0400.png"/><image src="snapshot0500.png"/>
 
 
 
@@ -80,4 +164,4 @@ import glob
 
 所涉及代码及数据的最终解释权归倪冰冰老师课题组所有
 
-Group xx
+Group 35&36
