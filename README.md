@@ -23,11 +23,9 @@ curl https://bootstrap.pypa.io/pip/2.7/get-pip.py -o get-pip.py
 
 mayapy get-pip.py
 
-以及
-
 mayapy -m pip install -i https://pypi.anaconda.org/carlkl/simple numpy
 
-安装pip以及numpy，期间不要关闭maya页面。
+安装pip以及numpy。
 
 在mayapy中输入
 
@@ -90,7 +88,7 @@ import glob
 的名称。运行 vis.py 程序，即可得到蒙皮模型对应的动作迁移图片和视频。
 
 
-对函数的理解
+## 对函数的理解
 
 在 transfer.py 中，函数 transfer_given_pose 的作用之一就是提取并分析这一树形结构，将树形结
 构的节点转化为关节的标号，进而对相同的关节进行匹配并生成新的模型。
@@ -99,7 +97,7 @@ import glob
 # 新增脚本说明
 
 
-基于文本的自动匹配
+## 基于文本的自动匹配
 
 
 由于匹配过程的关键在于将.txt 文件中的模型关节序号与 transfer.py 文件中的人体关节序号进行
@@ -122,25 +120,25 @@ import glob
 串转换为字典即可得到匹配结果。
 
 
-可见代码automap。
+可见代码automap.py。
 
 
-mtl 文件修改
+## mtl 文件修改
 
 
-在有蒙皮模型的匹配过程中，需要将.mtl 文件下的 map_Kd 后的绝对路径地址修改为相对路径
+在有蒙皮模型的匹配过程中，需要将.mtl文件下的 map_Kd 后的绝对路径地址修改为相对路径
 地址，否则会导致找不到蒙皮文件，得到的匹配模型为灰色。可以通过文件读写实现这一过程。具
-体实现思路是使用遍历.mtl 文件，使用 split 提取每一行第一个单词，当检测到 map_Kd 所在行时将
+体实现思路是使用遍历.mtl文件，使用 split 提取每一行第一个单词，当检测到 map_Kd 所在行时将
 其后的路径修改，并将修改后的文件写回原文件。
 
 
-可见代码changemap
+可见代码changemap.py。
 
 
-使用方法
+## 使用方法
 
 
-在需要对 manual_model_to_smpl 进行修改时调用即可实现自动匹配。对.mtl 文件的修改在蒙皮
+在需要对 manual_model_to_smpl 进行修改时调用即可实现自动匹配。对.mtl文件的修改在蒙皮
 开始前完成即可
 
 
