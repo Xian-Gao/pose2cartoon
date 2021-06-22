@@ -153,15 +153,24 @@ import glob
 # 项目结果
 
 ## 36
+
+### 10
 <image src="183834.png"/><image src="183912.png"/><image src="183939.png"/><image src="184104.png"/><image src="184213.png"/>
 <image src="184250.png"/><image src="184354.png"/><image src="184421.png"/><image src="184450.png"/><image src="184641.png"/>
 <image src="184702.png"/><image src="184828.png"/>
+
+### 5
 <image src="snapshot00.png"/><image src="snapshot0101.png"/><image src="snapshot0200.png"/>
 <image src="snapshot0300.png"/><image src="snapshot0400.png"/><image src="snapshot0500.png"/>
 
+
 ## 37
+
+### 10
 <image src="185550.png"/><image src="185613.png"/><image src="185659.png"/><image src="185732.png"/><image src="185754.png"/>
 <image src="185820.png"/><image src="185840.png"/><image src="185900.png"/><image src="185921.png"/><image src="190148.png"/>
+
+### 5
 <image src="191110.png"/><image src="191139.png"/><image src="191204.png"/><image src="191226.png"/><image src="191250.png"/>
 
 
@@ -173,4 +182,3 @@ import glob
 
 所涉及代码及数据的最终解释权归倪冰冰老师课题组所有
 
-Group 35&36
