@@ -2,13 +2,13 @@
 
 EE228 课程大作业 利用3D骨架控制3D卡通人物 (https://github.com/yuzhenbo/pose2carton)
 
-数据组别： 36 & 37 
+数据组别： 35 & 36 
 
 数据类型： 
 
-36: 12组匹配 + 6组蒙皮
+35: 12组匹配 + 6组蒙皮
 
-37: 10组匹配 + 5组蒙皮
+36: 10组匹配 + 5组蒙皮
 
 
 
@@ -152,7 +152,7 @@ import glob
 
 # 项目结果
 
-## 36
+## 35
 
 ### 12组匹配
 <image src="183834.png"/><image src="183912.png"/><image src="183939.png"/><image src="184104.png"/><image src="184213.png"/>
@@ -164,7 +164,7 @@ import glob
 <image src="snapshot0300.png"/><image src="snapshot0400.png"/><image src="snapshot0500.png"/>
 
 
-## 37
+## 36
 
 ### 10组匹配
 <image src="185550.png"/><image src="185613.png"/><image src="185659.png"/><image src="185732.png"/><image src="185754.png"/>
