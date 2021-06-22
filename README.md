@@ -159,7 +159,7 @@ import glob
 <image src="184250.png"/><image src="184354.png"/><image src="184421.png"/><image src="184450.png"/><image src="184641.png"/>
 <image src="184702.png"/><image src="184828.png"/>
 
-### 5组蒙皮
+### 6组蒙皮
 <image src="snapshot00.png"/><image src="snapshot0101.png"/><image src="snapshot0200.png"/>
 <image src="snapshot0300.png"/><image src="snapshot0400.png"/><image src="snapshot0500.png"/>
 
